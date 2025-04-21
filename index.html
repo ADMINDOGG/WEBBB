@@ -244,6 +244,7 @@
             z-index: 1;
             letter-spacing: 1px;
             box-shadow: 0 10px 30px rgba(108, 17, 255, 0.3);
+            cursor: pointer;
         }
         
         .btn:before {
@@ -756,6 +757,137 @@
                 opacity: 0.5;
             }
         }
+
+        /* Modal Styles for Checkout */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: rgba(15, 15, 15, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            border: 1px solid rgba(108, 17, 255, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            animation: modalAppear 0.3s ease-out;
+        }
+        
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--light);
+            opacity: 0.7;
+            transition: all 0.3s;
+        }
+        
+        .close-modal:hover {
+            opacity: 1;
+            color: var(--accent);
+        }
+        
+        .modal-title {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .order-summary {
+            background: rgba(10, 10, 10, 0.5);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid rgba(108, 17, 255, 0.2);
+        }
+        
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .item-row:last-child {
+            border-bottom: none;
+        }
+        
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            margin-top: 15px;
+            border-top: 2px solid rgba(108, 17, 255, 0.3);
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .total-price {
+            color: var(--accent);
+        }
+        
+        .checkout-btn {
+            background: var(--gradient);
+            color: var(--light);
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 10px 30px rgba(108, 17, 255, 0.3);
+        }
+        
+        .checkout-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(108, 17, 255, 0.4);
+        }
+        
+        .secure-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            color: var(--light);
+            opacity: 0.7;
+            font-size: 14px;
+        }
+        
+        .secure-badge i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
         
         /* Mobile Responsive */
         @media (max-width: 768px) {
@@ -787,6 +919,10 @@
             .cta-timer {
                 flex-wrap: wrap;
             }
+            
+            .modal-content {
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
@@ -813,125 +949,20 @@
         <div class="floating-key key-4"></div>
     </div>
     
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <i class="fas fa-key"></i>DOGHUB
-                </div>
-                <div class="nav-items">
-                    <a href="#features">Features</a>
-                    <a href="#testimonials">Testimonials</a>
-                    <a href="#buy-now">Buy Now</a>
-                </div>
-            </div>
-        </div>
-    </header>
-    
-    <section class="hero">
-        <div class="hero-content">
-            <h1>UNLOCK YOUR PREMIUM EXPERIENCE</h1>
-            <p>Get unlimited access to all DOGHUB premium features with our exclusive offer</p>
+    <!-- Modal Checkout -->
+    <div class="modal" id="checkoutModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 class="modal-title">COMPLETE YOUR ORDER</h2>
+            <p>You're just one step away from unlocking premium DOGHUB features!</p>
             
-            <div class="price-container">
-                <div class="price-tag">
-                    <span class="original-price">500 THB</span>
-                    <span class="discount-price">480 THB</span>
-                    <div class="lifetime">LIFETIME ACCESS</div>
+            <div class="order-summary">
+                <div class="item-row">
+                    <span>Product:</span>
+                    <span>DOGHUB Key</span>
                 </div>
-            </div>
-            
-            <a href="#buy-now" class="btn">CLAIM YOUR KEY NOW</a>
-        </div>
-    </section>
-    
-    <section class="features" id="features">
-        <div class="container">
-            <h2 class="section-title">PREMIUM FEATURES</h2>
-            
-            <div class="feature-grid">
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <i class="fas fa-infinity"></i>
-                    </div>
-                    <h3 class="feature-title">Lifetime License</h3>
-                    <p>Pay once and enjoy all features forever without any recurring fees or hidden costs.</p>
+                <div class="item-row">
+                    <span>License Type:</span>
+                    <span>Lifetime Access</span>
                 </div>
-                
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <h3 class="feature-title">Premium Support</h3>
-                    <p>Get priority access to our dedicated support team 24/7 with guaranteed response times.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3 class="feature-title">Advanced Tools</h3>
-                    <p>Unlock all premium tools and features available on DOGHUB platform for maximum productivity.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h3 class="feature-title">Faster Performance</h3>
-                    <p>Experience enhanced speed and performance with dedicated resources for premium users.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <i class="fas fa-sync-alt"></i>
-                    </div>
-                    <h3 class="feature-title">Regular Updates</h3>
-                    <p>Get access to all future updates and new features as they're released with zero additional cost.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3 class="feature-title">Enhanced Security</h3>
-                    <p>Enjoy additional security features to protect your data with enterprise-level encryption.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="testimonials" id="testimonials">
-        <div class="container">
-            <h2 class="section-title">WHAT OUR USERS SAY</h2>
-            
-            <div class="testimonial-grid">
-                <div class="testimonial-item">
-                    <div class="quote-icon">
-                        <i class="fas fa-quote-right"></i>
-                    </div>
-                    <p class="testimonial-text">"The DOGHUB Key has completely transformed my workflow. The premium features are game-changing and worth every penny. Best investment for my business this year!"</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">J</div>
-                        <div>
-                            <p>John Davidson</p>
-                            <small>Software Developer</small>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-item">
-                    <div class="quote-icon">
-                        <i class="fas fa-quote-right"></i>
-                    </div>
-                    <p class="testimonial-text">"I was hesitant at first, but the lifetime access made it a no-brainer. The premium features are absolutely worth it, and the support team is incredibly responsive."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">S</div>
-                        <div>
-                            <p>Sarah Thompson</p>
-                            <small>Digital Marketer</small>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial
+                <div class
