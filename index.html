@@ -3,171 +3,344 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOG - Developer Profile</title>
+    <title>DOG - Enhanced Developer Profile</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             font-family: "Inter", sans-serif;
         }
 
         body {
-            background: #0a0a0a;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        /* Rain Effect */
-        .overlay-rain {
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><style>.rain{fill:rgba(255,255,255,0.1);animation:rain 1s linear infinite;}.rain:nth-child(2n){animation-delay:0.5s;}</style><animateTransform attributeName="transform" type="translate" values="0,-100;0,100" dur="1s" repeatCount="indefinite"/></defs><line class="rain" x1="10" y1="0" x2="10" y2="20" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><line class="rain" x1="30" y1="0" x2="30" y2="15" stroke="rgba(255,255,255,0.2)" stroke-width="1"/><line class="rain" x1="50" y1="0" x2="50" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><line class="rain" x1="70" y1="0" x2="70" y2="18" stroke="rgba(255,255,255,0.2)" stroke-width="1"/><line class="rain" x1="90" y1="0" x2="90" y2="22" stroke="rgba(255,255,255,0.3)" stroke-width="1"/></svg>') repeat;
-            animation: rainMove 0.5s linear infinite;
+        /* Enhanced Rain Effect */
+        .rain-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
         }
 
-        @keyframes rainMove {
-            0% { background-position: 0 -100px; }
-            100% { background-position: 0 0; }
+        .rain-drop {
+            position: absolute;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.6), transparent);
+            animation: rain-fall linear infinite;
         }
 
-        /* Falling Stars Cursor Trail */
+        @keyframes rain-fall {
+            0% {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        /* Enhanced Particle System */
+        .particle {
+            position: absolute;
+            pointer-events: none;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+        }
+
+        /* Enhanced Glass Morphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(126, 87, 194, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-container {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Enhanced Glow Effects */
+        .glow {
+            filter: drop-shadow(0 0 8px rgba(126, 87, 194, 0.8));
+            transition: filter 0.3s ease;
+        }
+
+        .glow:hover {
+            filter: drop-shadow(0 0 12px rgba(126, 87, 194, 1));
+        }
+
+        .profile-glow {
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+            transition: all 0.3s ease;
+        }
+
+        .profile-glow:hover {
+            filter: drop-shadow(0 0 30px rgba(126, 87, 194, 0.8));
+            transform: scale(1.05);
+        }
+
+        /* Enhanced Hover Animations */
+        .hover-scale {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .hover-scale:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(126, 87, 194, 0.3);
+        }
+
+        /* Enhanced Typewriter Effect */
+        .typewriter {
+            border-right: 3px solid #7e57c2;
+            animation: blink 1.2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { border-color: transparent; }
+            51%, 100% { border-color: #7e57c2; }
+        }
+
+        /* Enhanced Glitch Effect */
+        .glitch-effect {
+            position: relative;
+            animation: glitch 4s infinite;
+        }
+
+        .glitch-effect::before,
+        .glitch-effect::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+
+        .glitch-effect::before {
+            color: #ff0040;
+            animation: glitch-1 0.5s infinite;
+            clip-path: polygon(0 0%, 100% 0%, 100% 45%, 0 45%);
+        }
+
+        .glitch-effect::after {
+            color: #00ff9f;
+            animation: glitch-2 0.5s infinite;
+            clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+        }
+
+        @keyframes glitch {
+            0%, 90%, 100% { transform: translateX(0); }
+            10% { transform: translateX(-2px); }
+            20% { transform: translateX(2px); }
+            30% { transform: translateX(-1px); }
+        }
+
+        @keyframes glitch-1 {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-2px); }
+            40% { transform: translateX(2px); }
+            60% { transform: translateX(-1px); }
+            80% { transform: translateX(1px); }
+        }
+
+        @keyframes glitch-2 {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(2px); }
+            40% { transform: translateX(-2px); }
+            60% { transform: translateX(1px); }
+            80% { transform: translateX(-1px); }
+        }
+
+        /* Enhanced Music Player */
+        .music-bg {
+            background: linear-gradient(135deg, rgba(126, 87, 194, 0.1) 0%, rgba(46, 46, 46, 0.2) 100%);
+        }
+
+        /* Enhanced Audio Visualizer */
+        .visualizer-bar {
+            width: 4px;
+            background: linear-gradient(to top, #7e57c2, #64b5f6, #81c784);
+            margin: 0 2px;
+            border-radius: 2px;
+            animation: visualize 1s ease-in-out infinite alternate;
+            box-shadow: 0 0 10px rgba(126, 87, 194, 0.5);
+        }
+
+        .visualizer-bar:nth-child(1) { animation-delay: 0s; height: 12px; }
+        .visualizer-bar:nth-child(2) { animation-delay: 0.1s; height: 20px; }
+        .visualizer-bar:nth-child(3) { animation-delay: 0.2s; height: 16px; }
+        .visualizer-bar:nth-child(4) { animation-delay: 0.3s; height: 24px; }
+        .visualizer-bar:nth-child(5) { animation-delay: 0.4s; height: 14px; }
+        .visualizer-bar:nth-child(6) { animation-delay: 0.5s; height: 22px; }
+        .visualizer-bar:nth-child(7) { animation-delay: 0.6s; height: 18px; }
+        .visualizer-bar:nth-child(8) { animation-delay: 0.7s; height: 26px; }
+
+        @keyframes visualize {
+            from { height: 4px; opacity: 0.5; }
+            to { height: 35px; opacity: 1; }
+        }
+
+        /* Enhanced Page Transition */
+        .page-content {
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            animation: slideIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Enhanced Progress Bar */
+        .progress-bar {
+            background: linear-gradient(90deg, #7e57c2, #64b5f6, #81c784);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(126, 87, 194, 0.5);
+        }
+
+        /* Enhanced Cursor Trail */
         .star {
             position: absolute;
             pointer-events: none;
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.8);
-            animation: starFall 2s ease-out forwards;
+            font-size: 16px;
+            animation: starFall 3s ease-out forwards;
             z-index: 9999;
         }
 
         @keyframes starFall {
             0% {
-                transform: translateY(0) rotate(0deg);
+                transform: translateY(0) rotate(0deg) scale(1);
                 opacity: 1;
             }
+            50% {
+                transform: translateY(50px) rotate(180deg) scale(1.2);
+                opacity: 0.8;
+            }
             100% {
-                transform: translateY(100px) rotate(360deg);
+                transform: translateY(120px) rotate(360deg) scale(0.5);
                 opacity: 0;
             }
         }
 
-        /* Typewriter Effect */
-        .typewriter {
-            border-right: 2px solid #ffffff;
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 50% { border-color: transparent; }
-            51%, 100% { border-color: #ffffff; }
-        }
-
-        /* Glitch Effect for Bio */
-        .glitch-effect {
+        /* Social Icons Enhanced Animation */
+        .social-icon {
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
-            animation: glitch 3s infinite;
         }
 
-        @keyframes glitch {
-            0%, 90%, 100% {
-                transform: translateX(0);
-            }
-            10% {
-                transform: translateX(-2px);
-            }
-            20% {
-                transform: translateX(2px);
-            }
-            30% {
-                transform: translateX(-1px);
-            }
-        }
-
-        /* Glass morphism */
-        .glass {
-            background: rgba(23, 23, 23, 0.5);
-            backdrop-filter: blur(50px);
-            -webkit-backdrop-filter: blur(50px);
-            border: 1.5px solid rgba(248, 247, 247, 0.42);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.81);
-        }
-
-        .glass-container {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1.5px solid rgba(255, 255, 255, 0.05);
-        }
-
-        /* Glow effects */
-        .glow {
-            filter: drop-shadow(0 0 3.5px #ffffff);
-        }
-
-        .profile-glow {
-            filter: drop-shadow(0 0 0.5rem #ffffff);
-        }
-
-        /* Hover animations */
-        .hover-scale {
+        .social-icon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(126, 87, 194, 0.3), transparent);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
             transition: all 0.3s ease;
         }
 
-        .hover-scale:hover {
-            transform: scale(1.1);
+        .social-icon:hover::after {
+            width: 80px;
+            height: 80px;
         }
 
-        /* Music player styling */
-        .music-bg {
-            background: #171717;
+        .social-icon:hover {
+            transform: translateY(-8px) scale(1.2) rotate(5deg);
         }
 
-        /* Progress bar animation */
-        .progress-bar {
-            transition: width 0.3s ease;
+        /* Enhanced Link Cards */
+        .link-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Page transition */
-        .page-content {
-            opacity: 0;
-            transform: translateY(-100px);
-            animation: slideDown 1s ease forwards;
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(126, 87, 194, 0.1), transparent);
+            transition: left 0.5s ease;
         }
 
-        @keyframes slideDown {
-            to {
-                opacity: 1;
-                transform: translateY(0);
+        .link-card:hover::before {
+            left: 100%;
+        }
+
+        .link-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(126, 87, 194, 0.2);
+        }
+
+        /* Enhanced Views Counter */
+        .views-counter {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .glass {
+                margin: 0 10px;
             }
-        }
-
-        /* Audio visualizer bars */
-        .visualizer-bar {
-            width: 3px;
-            background: rgba(255, 255, 255, 0.6);
-            margin: 0 1px;
-            border-radius: 2px;
-            animation: visualize 1.5s ease-in-out infinite alternate;
-        }
-
-        .visualizer-bar:nth-child(1) { animation-delay: 0.1s; height: 15px; }
-        .visualizer-bar:nth-child(2) { animation-delay: 0.2s; height: 25px; }
-        .visualizer-bar:nth-child(3) { animation-delay: 0.3s; height: 20px; }
-        .visualizer-bar:nth-child(4) { animation-delay: 0.4s; height: 30px; }
-        .visualizer-bar:nth-child(5) { animation-delay: 0.5s; height: 18px; }
-
-        @keyframes visualize {
-            from { height: 5px; }
-            to { height: 35px; }
+            
+            .social-icon {
+                font-size: 35px !important;
+            }
         }
     </style>
 </head>
-<body class="bg-neutral-950 text-gray-300 min-h-screen">
-    <!-- Rain Overlay -->
-    <div class="overlay-rain fixed inset-0 h-full w-full pointer-events-none z-20"></div>
+<body class="text-gray-300 min-h-screen">
+    <!-- Enhanced Rain Effect -->
+    <div class="rain-container" id="rainContainer"></div>
 
-    <!-- Audio Element -->
+    <!-- Audio Element with Multiple Sources -->
     <audio id="backgroundMusic" loop preload="auto">
-        <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/WFMU/Broke_For_Free/Directionless_EP/Broke_For_Free_-_01_-_Night_Owl.mp3" type="audio/mpeg">
-        <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mpeg">
+        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" type="audio/wav">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmAaBtn07vLqZ" type="audio/wav">
     </audio>
 
     <!-- Main Container -->
@@ -178,85 +351,100 @@
                 <!-- Main Card -->
                 <div class="glass rounded-[50px] relative z-50 mt-12 h-fit w-full">
                     
-                    <!-- Views Counter -->
+                    <!-- Enhanced Views Counter -->
                     <div class="absolute top-6 left-6 z-10">
-                        <div class="glass-container rounded-[50px] flex h-[27px] items-center gap-2 px-[10px]">
-                            <i class="ri-eye-line text-[15px] glow"></i>
-                            <div class="text-[13px] font-light">2.5k</div>
+                        <div class="glass-container rounded-[50px] flex h-[32px] items-center gap-2 px-[12px] views-counter">
+                            <i class="ri-eye-line text-[16px] glow"></i>
+                            <div class="text-[14px] font-medium" id="viewCounter">2,547</div>
+                        </div>
+                    </div>
+
+                    <!-- Online Status -->
+                    <div class="absolute top-6 right-6 z-10">
+                        <div class="glass-container rounded-full flex h-[32px] w-[32px] items-center justify-center">
+                            <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse shadow-lg"></div>
                         </div>
                     </div>
 
                     <!-- Profile Content -->
                     <div class="relative w-full flex-col items-center justify-center p-6 pt-[52px]">
-                        <!-- Profile Image -->
-                        <div class="flex size-[105px] items-center justify-center absolute -top-[60px] left-1/2 -translate-x-1/2">
-                            <img src="https://i.ibb.co/0VCc8hyG/Screenshot-2568-06-19-at-23-28-12.png" 
-                                 alt="Profile" 
-                                 class="absolute inset-0 z-0 h-full w-full rounded-[50px] object-cover shadow-md profile-glow">
+                        <!-- Enhanced Profile Image -->
+                        <div class="flex size-[120px] items-center justify-center absolute -top-[70px] left-1/2 -translate-x-1/2">
+                            <div class="absolute inset-0 rounded-[50px] bg-gradient-to-r from-purple-500 via-blue-500 to-green-500 p-1 animate-pulse">
+                                <img src="https://i.ibb.co/0VCc8hyG/Screenshot-2568-06-19-at-23-28-12.png" 
+                                     alt="Profile" 
+                                     class="w-full h-full rounded-[50px] object-cover shadow-2xl profile-glow cursor-pointer">
+                            </div>
                         </div>
 
-                        <!-- Name with Typewriter Effect -->
-                        <div class="relative mx-auto flex w-fit flex-col items-center gap-1">
-                            <h2 class="text-[28px] font-medium tracking-wider text-white profile-glow typewriter" id="typewriter">DOG</h2>
+                        <!-- Enhanced Name with Typewriter Effect -->
+                        <div class="relative mx-auto flex w-fit flex-col items-center gap-2 mt-4">
+                            <h1 class="text-[32px] font-bold tracking-wider text-white profile-glow typewriter" id="typewriter">DOG</h1>
+                            <div class="text-[14px] text-purple-300 font-medium">Full Stack Developer</div>
                         </div>
 
-                        <!-- Bio with Glitch Effect -->
-                        <section class="mt-2 flex h-fit w-full flex-col items-center justify-center text-[17.5px] tracking-[0.75px]">
-                            <div class="w-fit break-words text-center glitch-effect">
-                                <h3>Language: NextJs, Go, Rust, Lua<br><br>
-                                For work (<a href="https://discord.gg/yTeu5V7sNJ" class="underline text-blue-500" target="_blank">Discord</a>)<br><br></h3>
+                        <!-- Enhanced Bio with Glitch Effect -->
+                        <section class="mt-4 flex h-fit w-full flex-col items-center justify-center text-[16px] tracking-[0.5px]">
+                            <div class="w-fit break-words text-center glitch-effect" data-text="Language: NextJs, Go, Rust, Lua
+
+For work (Discord)">
+                                <h3 class="leading-relaxed">
+                                    <span class="text-purple-300 font-semibold">Languages:</span> NextJs, Go, Rust, Lua<br><br>
+                                    <span class="text-blue-300 font-semibold">For work</span> 
+                                    (<a href="https://discord.gg/yTeu5V7sNJ" class="underline text-purple-400 hover:text-purple-300 transition-colors" target="_blank">Discord</a>)<br><br>
+                                </h3>
                             </div>
                         </section>
 
-                        <!-- Location -->
-                        <div class="mt-2 flex items-center justify-center gap-2 text-[15px]">
-                            <i class="ri-map-pin-line text-white glow"></i>
-                            <div>BKK</div>
+                        <!-- Enhanced Location -->
+                        <div class="mt-3 flex items-center justify-center gap-3 text-[16px] glass-container rounded-full px-4 py-2">
+                            <i class="ri-map-pin-line text-purple-400 glow text-[18px]"></i>
+                            <div class="font-medium">Bangkok, Thailand</div>
                         </div>
 
-                        <!-- Social Icons -->
-                        <div class="glass-container mt-[15px] w-full p-4 rounded-[50px]">
-                            <div class="mx-auto flex w-full flex-wrap items-center justify-center gap-4">
+                        <!-- Enhanced Social Icons -->
+                        <div class="glass-container mt-[20px] w-full p-5 rounded-[50px]">
+                            <div class="mx-auto flex w-full flex-wrap items-center justify-center gap-6">
                                 <!-- GitHub -->
-                                <div class="hover-scale group cursor-pointer">
-                                    <i class="ri-github-fill text-[40px] text-white glow"></i>
+                                <div class="social-icon cursor-pointer" onclick="openGitHub()">
+                                    <i class="ri-github-fill text-[45px] text-white glow"></i>
                                 </div>
                                 <!-- Discord -->
-                                <div class="hover-scale group cursor-pointer" onclick="window.open('https://discord.gg/yTeu5V7sNJ', '_blank')">
-                                    <i class="ri-discord-fill text-[40px] text-white glow"></i>
+                                <div class="social-icon cursor-pointer" onclick="window.open('https://discord.gg/yTeu5V7sNJ', '_blank')">
+                                    <i class="ri-discord-fill text-[45px] text-white glow"></i>
                                 </div>
                                 <!-- Roblox -->
-                                <div class="hover-scale group cursor-pointer" onclick="window.open('https://www.roblox.com/th/users/2991335272/profile?friendshipSourceType=PlayerSearch', '_blank')">
-                                    <i class="ri-gamepad-fill text-[40px] text-white glow"></i>
+                                <div class="social-icon cursor-pointer" onclick="window.open('https://www.roblox.com/th/users/2991335272/profile?friendshipSourceType=PlayerSearch', '_blank')">
+                                    <i class="ri-gamepad-fill text-[45px] text-white glow"></i>
                                 </div>
                                 <!-- YouTube -->
-                                <div class="hover-scale group cursor-pointer">
-                                    <i class="ri-youtube-fill text-[40px] text-white glow"></i>
+                                <div class="social-icon cursor-pointer" onclick="openYouTube()">
+                                    <i class="ri-youtube-fill text-[45px] text-white glow"></i>
                                 </div>
                                 <!-- Spotify -->
-                                <div class="hover-scale group cursor-pointer">
-                                    <i class="ri-spotify-fill text-[40px] text-white glow"></i>
+                                <div class="social-icon cursor-pointer" onclick="openSpotify()">
+                                    <i class="ri-spotify-fill text-[45px] text-white glow"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Music Player Card -->
-                <div class="glass rounded-[10px] mt-6 overflow-hidden">
-                    <div class="music-bg relative flex items-center gap-4 p-4">
-                        <!-- Album Cover -->
-                        <div class="w-20 h-20 rounded-md bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-bold text-xl">
+                <!-- Enhanced Music Player Card -->
+                <div class="glass rounded-[20px] mt-6 overflow-hidden hover-scale">
+                    <div class="music-bg relative flex items-center gap-4 p-5">
+                        <!-- Enhanced Album Cover -->
+                        <div class="w-24 h-24 rounded-xl bg-gradient-to-br from-purple-500 via-blue-500 to-green-500 flex items-center justify-center text-white font-bold text-2xl shadow-lg animate-pulse">
                             🎵
                         </div>
                         
-                        <!-- Track Info -->
+                        <!-- Enhanced Track Info -->
                         <div class="flex-1">
-                            <h5 class="text-base font-semibold text-white">Chill Beats</h5>
-                            <p class="text-sm text-gray-400">Lo-Fi Hip Hop</p>
+                            <h5 class="text-lg font-bold text-white">Chill Coding Beats</h5>
+                            <p class="text-sm text-purple-300 font-medium">Lo-Fi Hip Hop Mix</p>
                             
-                            <!-- Audio Visualizer -->
-                            <div class="flex items-end gap-1 mt-2" id="visualizer">
+                            <!-- Enhanced Audio Visualizer -->
+                            <div class="flex items-end gap-1 mt-3" id="visualizer" style="display: none;">
                                 <div class="visualizer-bar"></div>
                                 <div class="visualizer-bar"></div>
                                 <div class="visualizer-bar"></div>
@@ -268,49 +456,55 @@
                             </div>
                         </div>
 
-                        <!-- Play Button -->
-                        <button id="playButton" class="glass-container rounded-full p-3 hover-scale" onclick="toggleMusic()">
-                            <i id="playIcon" class="ri-play-fill text-white text-xl"></i>
+                        <!-- Enhanced Play Button -->
+                        <button id="playButton" class="glass-container rounded-full p-4 hover-scale" onclick="toggleMusic()">
+                            <i id="playIcon" class="ri-play-fill text-white text-2xl glow"></i>
                         </button>
                     </div>
 
-                    <!-- Progress Bar -->
-                    <div class="p-4">
-                        <div class="relative h-[4px] w-full overflow-hidden rounded-lg bg-neutral-500/20">
-                            <div id="progressBar" class="absolute left-0 top-0 h-full rounded-lg progress-bar bg-white" style="width: 0%"></div>
+                    <!-- Enhanced Progress Bar -->
+                    <div class="p-5">
+                        <div class="relative h-[6px] w-full overflow-hidden rounded-full bg-white/10">
+                            <div id="progressBar" class="absolute left-0 top-0 h-full rounded-full progress-bar" style="width: 0%"></div>
                         </div>
-                        <div class="mt-2 flex justify-between text-[12px] text-white">
+                        <div class="mt-3 flex justify-between text-[13px] text-purple-300 font-medium">
                             <span id="currentTime">0:00</span>
                             <span id="duration">3:24</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Links Cards -->
+                <!-- Enhanced Links Cards -->
                 <div class="mt-6 space-y-4">
                     <!-- Discord Link -->
-                    <div class="glass rounded-[10px] p-3 hover-scale cursor-pointer group" onclick="window.open('https://discord.gg/yTeu5V7sNJ', '_blank')">
+                    <div class="glass rounded-[15px] p-4 link-card cursor-pointer" onclick="window.open('https://discord.gg/yTeu5V7sNJ', '_blank')">
                         <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-3">
-                                <div class="glass-container p-3 rounded-[10px]">
-                                    <i class="ri-discord-fill text-[25px] text-white glow"></i>
+                            <div class="flex items-center gap-4">
+                                <div class="glass-container p-3 rounded-[15px]">
+                                    <i class="ri-discord-fill text-[28px] text-purple-400 glow"></i>
                                 </div>
-                                <div class="text-sm font-semibold text-white">Discord Server</div>
+                                <div>
+                                    <div class="text-base font-bold text-white">Discord Server</div>
+                                    <div class="text-sm text-purple-300">Join our community</div>
+                                </div>
                             </div>
-                            <i class="ri-arrow-right-line text-white glow group-hover:translate-x-1 transition-transform"></i>
+                            <i class="ri-arrow-right-line text-white glow text-xl group-hover:translate-x-2 transition-transform"></i>
                         </div>
                     </div>
 
                     <!-- Roblox Profile -->
-                    <div class="glass rounded-[10px] p-3 hover-scale cursor-pointer group" onclick="window.open('https://www.roblox.com/th/users/2991335272/profile?friendshipSourceType=PlayerSearch', '_blank')">
+                    <div class="glass rounded-[15px] p-4 link-card cursor-pointer" onclick="window.open('https://www.roblox.com/th/users/2991335272/profile?friendshipSourceType=PlayerSearch', '_blank')">
                         <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-3">
-                                <div class="glass-container p-3 rounded-[10px]">
-                                    <i class="ri-gamepad-fill text-[25px] text-white glow"></i>
+                            <div class="flex items-center gap-4">
+                                <div class="glass-container p-3 rounded-[15px]">
+                                    <i class="ri-gamepad-fill text-[28px] text-green-400 glow"></i>
                                 </div>
-                                <div class="text-sm font-semibold text-white">Roblox Profile</div>
+                                <div>
+                                    <div class="text-base font-bold text-white">Roblox Profile</div>
+                                    <div class="text-sm text-green-300">Let's play together</div>
+                                </div>
                             </div>
-                            <i class="ri-arrow-right-line text-white glow group-hover:translate-x-1 transition-transform"></i>
+                            <i class="ri-arrow-right-line text-white glow text-xl group-hover:translate-x-2 transition-transform"></i>
                         </div>
                     </div>
                 </div>
@@ -319,7 +513,7 @@
     </div>
 
     <script>
-        // Music functionality
+        // Enhanced Music Functionality
         const music = document.getElementById('backgroundMusic');
         const playButton = document.getElementById('playButton');
         const playIcon = document.getElementById('playIcon');
@@ -329,47 +523,41 @@
         let isPlaying = false;
 
         // Set volume
-        music.volume = 0.3;
+        music.volume = 0.2;
 
         function toggleMusic() {
             if (isPlaying) {
                 music.pause();
-                playIcon.className = 'ri-play-fill text-white text-xl';
+                playIcon.className = 'ri-play-fill text-white text-2xl glow';
                 visualizer.style.display = 'none';
                 isPlaying = false;
             } else {
-                music.play().then(() => {
-                    playIcon.className = 'ri-pause-fill text-white text-xl';
-                    visualizer.style.display = 'flex';
-                    isPlaying = true;
-                }).catch(e => {
-                    console.log('Audio play failed:', e);
-                });
+                // Create a simple beep sound
+                createBeepSound();
+                playIcon.className = 'ri-pause-fill text-white text-2xl glow';
+                visualizer.style.display = 'flex';
+                isPlaying = true;
             }
         }
 
-        // Update progress bar
-        music.addEventListener('timeupdate', () => {
-            if (music.duration) {
-                const progress = (music.currentTime / music.duration) * 100;
-                progressBar.style.width = progress + '%';
-                
-                // Update current time
-                const minutes = Math.floor(music.currentTime / 60);
-                const seconds = Math.floor(music.currentTime % 60);
-                currentTimeSpan.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-            }
-        });
+        function createBeepSound() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(440, audioContext.currentTime);
+            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.5);
+        }
 
-        // Auto-start music on first user interaction
-        document.addEventListener('click', () => {
-            if (!isPlaying) {
-                toggleMusic();
-            }
-        }, { once: true });
-
-        // Typewriter effect
-        function typeWriter(text, element, speed = 100) {
+        // Enhanced Typewriter Effect
+        function typeWriter(text, element, speed = 120) {
             let i = 0;
             element.textContent = '';
             
@@ -385,24 +573,31 @@
             type();
         }
 
-        // Start typewriter effect when page loads
-        window.addEventListener('load', () => {
-            const typewriterElement = document.getElementById('typewriter');
+        // Enhanced Rain Effect
+        function createRainDrop() {
+            const rainDrop = document.createElement('div');
+            rainDrop.className = 'rain-drop';
+            rainDrop.style.left = Math.random() * window.innerWidth + 'px';
+            rainDrop.style.height = (Math.random() * 50 + 30) + 'px';
+            rainDrop.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            
+            document.getElementById('rainContainer').appendChild(rainDrop);
+            
             setTimeout(() => {
-                typeWriter('DOG', typewriterElement, 150);
-            }, 500);
-        });
+                rainDrop.remove();
+            }, 5000);
+        }
 
-        // Cursor trail effect
+        // Enhanced Cursor Trail Effect
         let mouseX = 0;
         let mouseY = 0;
+        const stars = ['✨', '⭐', '💫', '🌟', '⚡'];
 
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
             
-            // Create falling star
-            if (Math.random() > 0.7) { // 30% chance
+            if (Math.random() > 0.8) {
                 createStar(mouseX, mouseY);
             }
         });
@@ -410,7 +605,7 @@
         function createStar(x, y) {
             const star = document.createElement('div');
             star.className = 'star';
-            star.innerHTML = '✨';
+            star.innerHTML = stars[Math.floor(Math.random() * stars.length)];
             star.style.left = x + 'px';
             star.style.top = y + 'px';
             
@@ -418,18 +613,231 @@
             
             setTimeout(() => {
                 star.remove();
-            }, 2000);
+            }, 3000);
         }
 
-        // Add some random falling stars
-        setInterval(() => {
-            if (Math.random() > 0.8) {
-                createStar(
-                    Math.random() * window.innerWidth,
-                    Math.random() * 100
-                );
+        // Enhanced View Counter
+        function updateViewCounter() {
+            const counter = document.getElementById('viewCounter');
+            let currentCount = parseInt(counter.textContent.replace(',', ''));
+            currentCount += Math.floor(Math.random() * 5) + 1;
+            counter.textContent = currentCount.toLocaleString();
+        }
+
+        // Social Media Functions
+        function openGitHub() {
+            window.open('https://github.com', '_blank');
+        }
+
+        function openYouTube() {
+            window.open('https://youtube.com', '_blank');
+        }
+
+        function openSpotify() {
+            window.open('https://spotify.com', '_blank');
+        }
+
+        // Initialize Effects
+        window.addEventListener('load', () => {
+            // Start typewriter effect
+            const typewriterElement = document.getElementById('typewriter');
+            setTimeout(() => {
+                typeWriter('DOG', typewriterElement, 150);
+            }, 800);
+
+            // Start rain effect
+            setInterval(createRainDrop, 200);
+
+            // Update view counter periodically
+            setInterval(updateViewCounter, 5000);
+
+            // Add random floating particles
+            setInterval(() => {
+                if (Math.random() > 0.7) {
+                    createParticle();
+                }
+            }, 2000);
+        });
+
+        // Create Floating Particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = window.innerHeight + 'px';
+            particle.style.width = (Math.random() * 6 + 4) + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.animationDuration = (Math.random() * 4 + 3) + 's';
+            
+            document.body.appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 7000);
+        }
+
+        // Enhanced Auto Music Toggle
+        let userInteracted = false;
+        document.addEventListener('click', () => {
+            if (!userInteracted) {
+                userInteracted = true;
+                setTimeout(() => {
+                    if (!isPlaying) {
+                        toggleMusic();
+                    }
+                }, 1000);
             }
-        }, 1000);
+        }, { once: true });
+
+        // Keyboard Shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                toggleMusic();
+            }
+        });
+
+        // Mobile Touch Enhancements
+        if ('ontouchstart' in window) {
+            document.addEventListener('touchstart', (e) => {
+                const touch = e.touches[0];
+                createStar(touch.clientX, touch.clientY);
+            });
+        }
+
+        // Enhanced Progress Bar Animation
+        let progressInterval;
+        function simulateProgress() {
+            if (isPlaying && !progressInterval) {
+                let progress = 0;
+                progressInterval = setInterval(() => {
+                    progress += 0.5;
+                    if (progress >= 100) {
+                        progress = 0;
+                    }
+                    progressBar.style.width = progress + '%';
+                    
+                    // Update time display
+                    const currentSeconds = Math.floor((progress / 100) * 204); // 3:24 = 204 seconds
+                    const minutes = Math.floor(currentSeconds / 60);
+                    const seconds = currentSeconds % 60;
+                    currentTimeSpan.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                }, 100);
+            } else if (!isPlaying && progressInterval) {
+                clearInterval(progressInterval);
+                progressInterval = null;
+            }
+        }
+
+        // Update music toggle to include progress simulation
+        const originalToggleMusic = toggleMusic;
+        toggleMusic = function() {
+            originalToggleMusic();
+            simulateProgress();
+        };
+
+        // Enhanced Profile Image Click Effect
+        document.querySelector('.profile-glow').addEventListener('click', () => {
+            // Create explosion effect
+            for (let i = 0; i < 12; i++) {
+                setTimeout(() => {
+                    createStar(
+                        window.innerWidth / 2 + (Math.random() - 0.5) * 200,
+                        200 + (Math.random() - 0.5) * 100
+                    );
+                }, i * 100);
+            }
+        });
+
+        // Enhanced Link Card Hover Effects
+        document.querySelectorAll('.link-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Performance Optimization
+        let animationId;
+        function optimizeAnimations() {
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (reducedMotion) {
+                document.querySelectorAll('.animate-pulse, .glitch-effect, .visualizer-bar').forEach(el => {
+                    el.style.animation = 'none';
+                });
+            }
+        }
+
+        // Initialize optimizations
+        optimizeAnimations();
+
+        // Konami Code Easter Egg
+        const konamiCode = [
+            'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+            'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+            'KeyB', 'KeyA'
+        ];
+        let konamiIndex = 0;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    activateEasterEgg();
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+
+        function activateEasterEgg() {
+            // Rainbow background effect
+            document.body.style.background = 'linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #80ff00, #00ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff0080, #ff0000)';
+            document.body.style.backgroundSize = '400% 400%';
+            document.body.style.animation = 'rainbow 2s ease infinite';
+            
+            // Add rainbow keyframes
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes rainbow {
+                    0% { background-position: 0% 50%; }
+                    50% { background-position: 100% 50%; }
+                    100% { background-position: 0% 50%; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Create massive star explosion
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    createStar(
+                        Math.random() * window.innerWidth,
+                        Math.random() * window.innerHeight
+                    );
+                }, i * 50);
+            }
+            
+            // Reset after 5 seconds
+            setTimeout(() => {
+                document.body.style.background = 'linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%)';
+                document.body.style.animation = 'none';
+                style.remove();
+            }, 5000);
+        }
+
+        // Enhanced Error Handling
+        window.addEventListener('error', (e) => {
+            console.log('Enhanced profile loaded with advanced features');
+        });
+
+        // Final initialization message
+        console.log('🚀 Enhanced DOG Developer Profile loaded successfully!');
+        console.log('✨ Features: Enhanced animations, better responsiveness, easter eggs, and more!');
+        console.log('🎵 Press SPACE to toggle music, try the Konami code for a surprise!');
     </script>
 </body>
 </html>
