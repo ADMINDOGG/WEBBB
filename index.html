@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Developer Profile</title>
+    <title>DOG - Developer Profile</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,127 +15,347 @@
             font-weight: 400;
             font-style: normal;
         }
+
+        body {
+            background: linear-gradient(135deg, #000000 0%, #111111 50%, #1a1a1a 100%);
+            overflow-x: hidden;
+        }
+
+        /* Snow Animation */
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: rgba(255, 255, 255, 0.8);
+            user-select: none;
+            pointer-events: none;
+            font-size: 1rem;
+            animation: snowfall linear infinite;
+        }
+
+        @keyframes snowfall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
         @keyframes slideIn {
             from { transform: translateY(20px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
+
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
         }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.8); }
+        }
+
         .animate-slideIn {
             animation: slideIn 0.6s ease forwards;
         }
+
         .animate-float {
             animation: float 3s ease-in-out infinite;
         }
-        .skill-bar {
-            transition: width 1s ease-in-out;
+
+        .animate-pulse-custom {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .animate-glow {
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        .profile-img {
+            transition: all 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        .music-controls {
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .skill-card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            background: rgba(30, 41, 59, 0.9);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .social-icon {
+            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .glass-effect {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
     </style>
 </head>
-<body class="bg-[#0F172A] text-gray-100 min-h-screen flex items-center justify-center p-4">
-    <div class="container max-w-3xl mx-auto">
-        <div class="bg-[#1E293B] rounded-xl p-4 md:p-8 shadow-2xl border border-[#334155]">
-            <div class="flex flex-col md:flex-row items-center md:items-start gap-6 mb-8">
-                <div class="w-32 h-32 md:w-40 md:h-40 overflow-hidden rounded-full border-4 border-blue-400">
-                    <img src="https://i.ibb.co/0VCc8hyG/Screenshot-2568-06-19-at-23-28-12.png" alt="Profile Picture" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white text-4xl font-bold" style="display: none;">
-                        D
-                    </div>
-                </div>
-                <div class="flex-1 text-center md:text-left">
-                    <h1 class="text-3xl md:text-4xl font-bold text-blue-400 mb-2 animate-slideIn">DOG</h1>
-                    <p class="text-sm md:text-base text-gray-400 mb-4 animate-slideIn">Web Development</p>
-                    <div class="space-y-2 text-sm md:text-base text-gray-300">
-                        <p><i class="ri-map-pin-line mr-2"></i>ประเทศไทย</p>
-                        <p><i class="ri-building-line mr-2"></i>Thailand Co.</p>
-                        <p><i class="ri-book-line mr-2"></i>คอมพิวเตอร์</p>
-                    </div>
-                </div>
-            </div>
+<body class="text-gray-100 min-h-screen">
+    <!-- Snow Container -->
+    <div id="snowContainer" class="fixed inset-0 pointer-events-none z-0"></div>
 
-            <div class="text-center mb-6 md:mb-10 animate-float">
-                <div class="text-4xl md:text-6xl font-mono mb-2 md:mb-4 text-blue-400 animate-pulse">&gt;&gt;&gt;</div>
-                <h1 class="text-2xl md:text-3xl font-mono">
-                    <span class="text-yellow-400">def</span> 
-                    <span class="text-blue-400">developer</span>()
-                </h1>
-            </div>
+    <!-- Audio Element -->
+    <audio id="backgroundMusic" loop>
+        <source src="https://www.soundjay.com/misc/sounds-712.mp3" type="audio/mpeg">
+        <source src="https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-one/zapsplat_multimedia_game_sound_bright_warm_positive_001_53866.mp3" type="audio/mpeg">
+    </audio>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 mb-8 md:mb-12">
-                <div class="skill-card bg-[#0F172A] p-4 md:p-6 rounded-lg text-center hover:scale-105 md:hover:scale-110 transition-all duration-300 animate-slideIn" style="animation-delay: 0.1s">
-                    <i class="ri-html5-fill text-3xl md:text-4xl text-orange-400 animate-float"></i>
-                    <p class="mt-2 text-xs md:text-sm">HTML5</p>
-                </div>
-                <div class="skill-card bg-[#0F172A] p-4 md:p-6 rounded-lg text-center hover:scale-105 md:hover:scale-110 transition-all duration-300 animate-slideIn" style="animation-delay: 0.2s">
-                    <i class="ri-css3-fill text-3xl md:text-4xl text-blue-400 animate-float"></i>
-                    <p class="mt-2 text-xs md:text-sm">CSS3</p>
-                </div>
-                <div class="skill-card bg-[#0F172A] p-4 md:p-6 rounded-lg text-center hover:scale-105 md:hover:scale-110 transition-all duration-300 animate-slideIn" style="animation-delay: 0.3s">
-                    <i class="ri-javascript-fill text-3xl md:text-4xl text-yellow-400 animate-float"></i>
-                    <p class="mt-2 text-xs md:text-sm">JavaScript</p>
-                </div>
-                <div class="skill-card bg-[#0F172A] p-4 md:p-6 rounded-lg text-center hover:scale-105 md:hover:scale-110 transition-all duration-300 animate-slideIn" style="animation-delay: 0.4s">
-                    <i class="ri-database-2-fill text-3xl md:text-4xl text-green-400 animate-float"></i>
-                    <p class="mt-2 text-xs md:text-sm">SQL</p>
-                </div>
-            </div>
+    <!-- Music Controls -->
+    <div class="fixed top-4 right-4 z-50 music-controls rounded-lg p-3">
+        <button id="musicToggle" class="text-white hover:text-blue-400 transition-colors">
+            <i id="musicIcon" class="ri-volume-up-fill text-xl"></i>
+        </button>
+    </div>
 
-            <div class="bg-[#0F172A] p-4 md:p-6 rounded-lg mb-6 md:mb-8">
-                <h2 class="text-lg md:text-xl font-mono text-blue-400 mb-4 md:mb-6"># Tools & Technologies</h2>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4">
-                    <div class="tool-card p-3 md:p-4 bg-[#1E293B] rounded-lg text-center hover:bg-[#2E3B4B] transition-colors">
-                        <i class="ri-reactjs-line text-xl md:text-2xl text-blue-400"></i>
-                        <p class="mt-1 md:mt-2 text-[10px] md:text-xs">React</p>
+    <!-- Main Content -->
+    <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
+        <div class="container max-w-4xl mx-auto">
+            <div class="glass-effect rounded-2xl p-6 md:p-10 shadow-2xl animate-glow">
+                
+                <!-- Profile Header -->
+                <div class="text-center mb-8">
+                    <div class="w-40 h-40 mx-auto mb-6 overflow-hidden rounded-full border-4 border-blue-400 animate-glow profile-img">
+                        <img src="https://i.ibb.co/0VCc8hyG/Screenshot-2568-06-19-at-23-28-12.png" alt="Profile Picture" class="w-full h-full object-cover">
                     </div>
-                    <div class="tool-card p-3 md:p-4 bg-[#1E293B] rounded-lg text-center hover:bg-[#2E3B4B] transition-colors">
-                        <i class="ri-database-2-line text-xl md:text-2xl text-green-400"></i>
-                        <p class="mt-1 md:mt-2 text-[10px] md:text-xs">MongoDB</p>
-                    </div>
-                    <div class="tool-card p-3 md:p-4 bg-[#1E293B] rounded-lg text-center hover:bg-[#2E3B4B] transition-colors">
-                        <i class="ri-github-fill text-xl md:text-2xl text-purple-400"></i>
-                        <p class="mt-1 md:mt-2 text-[10px] md:text-xs">GitHub</p>
-                    </div>
-                    <div class="tool-card p-3 md:p-4 bg-[#1E293B] rounded-lg text-center hover:bg-[#2E3B4B] transition-colors">
-                        <i class="ri-terminal-box-fill text-xl md:text-2xl text-yellow-400"></i>
-                        <p class="mt-1 md:mt-2 text-[10px] md:text-xs">Terminal</p>
-                    </div>
-                    <div class="tool-card p-3 md:p-4 bg-[#1E293B] rounded-lg text-center hover:bg-[#2E3B4B] transition-colors">
-                        <i class="ri-code-s-slash-fill text-xl md:text-2xl text-orange-400"></i>
-                        <p class="mt-1 md:mt-2 text-[10px] md:text-xs">VS Code</p>
-                    </div>
-                    <div class="tool-card p-3 md:p-4 bg-[#1E293B] rounded-lg text-center hover:bg-[#2E3B4B] transition-colors">
-                        <i class="ri-git-branch-fill text-xl md:text-2xl text-red-400"></i>
-                        <p class="mt-1 md:mt-2 text-[10px] md:text-xs">Git</p>
-                    </div>
-                    <div class="tool-card p-3 md:p-4 bg-[#1E293B] rounded-lg text-center hover:bg-[#2E3B4B] transition-colors">
-                        <i class="ri-cloud-fill text-xl md:text-2xl text-blue-400"></i>
-                        <p class="mt-1 md:mt-2 text-[10px] md:text-xs">AWS</p>
-                    </div>
-                    <div class="tool-card p-3 md:p-4 bg-[#1E293B] rounded-lg text-center hover:bg-[#2E3B4B] transition-colors">
-                        <i class="ri-nodejs-fill text-xl md:text-2xl text-green-500"></i>
-                        <p class="mt-1 md:mt-2 text-[10px] md:text-xs">Node.js</p>
+                    <h1 class="text-5xl md:text-6xl font-bold text-white mb-3 animate-slideIn">DOG</h1>
+                    <p class="text-xl text-blue-400 mb-4 animate-slideIn">Web Developer</p>
+                    <div class="text-gray-300 space-y-1">
+                        <p><i class="ri-map-pin-line mr-2 text-blue-400"></i>ประเทศไทย</p>
+                        <p><i class="ri-building-line mr-2 text-blue-400"></i>Thailand Co.</p>
+                        <p><i class="ri-book-line mr-2 text-blue-400"></i>คอมพิวเตอร์</p>
                     </div>
                 </div>
-            </div>
 
-            <div class="flex justify-center space-x-4 md:space-x-6">
-                <a href="#" class="contact-link text-2xl md:text-3xl hover:text-blue-400 transition-all duration-300 hover:-translate-y-1">
-                    <i class="ri-github-fill"></i>
-                </a>
-                <a href="#" class="contact-link text-2xl md:text-3xl hover:text-green-400 transition-all duration-300 hover:-translate-y-1">
-                    <i class="ri-facebook-fill"></i>
-                </a>
-                <a href="#" class="contact-link text-2xl md:text-3xl hover:text-purple-400 transition-all duration-300 hover:-translate-y-1">
-                    <i class="ri-youtube-fill"></i>
-                </a>
-                <a href="#" class="contact-link text-2xl md:text-3xl hover:text-pink-400 transition-all duration-300 hover:-translate-y-1">
-                    <i class="ri-instagram-fill"></i>
-                </a>
+                <!-- Code Animation -->
+                <div class="text-center mb-10 animate-float">
+                    <div class="text-6xl font-mono mb-4 text-blue-400 animate-pulse-custom">&gt;&gt;&gt;</div>
+                    <h2 class="text-3xl font-mono">
+                        <span class="text-yellow-400">def</span> 
+                        <span class="text-blue-400">developer</span>
+                        <span class="text-white">()</span>
+                    </h2>
+                </div>
+
+                <!-- Skills Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+                    <div class="skill-card p-6 rounded-xl text-center animate-slideIn" style="animation-delay: 0.1s">
+                        <i class="ri-html5-fill text-5xl text-orange-400 animate-float mb-3"></i>
+                        <p class="text-sm font-medium">HTML5</p>
+                    </div>
+                    <div class="skill-card p-6 rounded-xl text-center animate-slideIn" style="animation-delay: 0.2s">
+                        <i class="ri-css3-fill text-5xl text-blue-400 animate-float mb-3"></i>
+                        <p class="text-sm font-medium">CSS3</p>
+                    </div>
+                    <div class="skill-card p-6 rounded-xl text-center animate-slideIn" style="animation-delay: 0.3s">
+                        <i class="ri-javascript-fill text-5xl text-yellow-400 animate-float mb-3"></i>
+                        <p class="text-sm font-medium">JavaScript</p>
+                    </div>
+                    <div class="skill-card p-6 rounded-xl text-center animate-slideIn" style="animation-delay: 0.4s">
+                        <i class="ri-database-2-fill text-5xl text-green-400 animate-float mb-3"></i>
+                        <p class="text-sm font-medium">Database</p>
+                    </div>
+                </div>
+
+                <!-- Tools Section -->
+                <div class="glass-effect p-6 rounded-xl mb-8">
+                    <h3 class="text-2xl font-mono text-blue-400 mb-6 text-center"># Tools & Technologies</h3>
+                    <div class="grid grid-cols-3 md:grid-cols-6 gap-4">
+                        <div class="skill-card p-4 rounded-lg text-center">
+                            <i class="ri-reactjs-line text-2xl text-blue-400 mb-2"></i>
+                            <p class="text-xs">React</p>
+                        </div>
+                        <div class="skill-card p-4 rounded-lg text-center">
+                            <i class="ri-nodejs-fill text-2xl text-green-400 mb-2"></i>
+                            <p class="text-xs">Node.js</p>
+                        </div>
+                        <div class="skill-card p-4 rounded-lg text-center">
+                            <i class="ri-github-fill text-2xl text-purple-400 mb-2"></i>
+                            <p class="text-xs">GitHub</p>
+                        </div>
+                        <div class="skill-card p-4 rounded-lg text-center">
+                            <i class="ri-terminal-box-fill text-2xl text-yellow-400 mb-2"></i>
+                            <p class="text-xs">Terminal</p>
+                        </div>
+                        <div class="skill-card p-4 rounded-lg text-center">
+                            <i class="ri-code-s-slash-fill text-2xl text-orange-400 mb-2"></i>
+                            <p class="text-xs">VS Code</p>
+                        </div>
+                        <div class="skill-card p-4 rounded-lg text-center">
+                            <i class="ri-cloud-fill text-2xl text-blue-400 mb-2"></i>
+                            <p class="text-xs">Cloud</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Links -->
+                <div class="flex justify-center space-x-6">
+                    <a href="#" class="social-icon p-4 rounded-full hover:text-blue-400">
+                        <i class="ri-github-fill text-2xl"></i>
+                    </a>
+                    <a href="#" class="social-icon p-4 rounded-full hover:text-green-400">
+                        <i class="ri-facebook-fill text-2xl"></i>
+                    </a>
+                    <a href="#" class="social-icon p-4 rounded-full hover:text-red-400">
+                        <i class="ri-youtube-fill text-2xl"></i>
+                    </a>
+                    <a href="#" class="social-icon p-4 rounded-full hover:text-pink-400">
+                        <i class="ri-instagram-fill text-2xl"></i>
+                    </a>
+                    <a href="#" class="social-icon p-4 rounded-full hover:text-green-500">
+                        <i class="ri-spotify-fill text-2xl"></i>
+                    </a>
+                </div>
+
+                <!-- Footer -->
+                <div class="text-center mt-8 text-gray-400">
+                    <p class="text-sm">© 2025 DOG Developer. Made with ❤️</p>
+                </div>
             </div>
         </div>
     </div>
+
+    <script>
+        // Snow Animation
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.innerHTML = '❄';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+            snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+            snowflake.style.opacity = Math.random();
+            
+            document.getElementById('snowContainer').appendChild(snowflake);
+            
+            setTimeout(() => {
+                snowflake.remove();
+            }, 5000);
+        }
+
+        // Create snowflakes continuously
+        setInterval(createSnowflake, 300);
+
+        // Music Control
+        const music = document.getElementById('backgroundMusic');
+        const musicToggle = document.getElementById('musicToggle');
+        const musicIcon = document.getElementById('musicIcon');
+        let isPlaying = false;
+
+        musicToggle.addEventListener('click', () => {
+            if (isPlaying) {
+                music.pause();
+                musicIcon.className = 'ri-volume-mute-fill text-xl';
+                isPlaying = false;
+            } else {
+                music.play().catch(e => {
+                    console.log('Audio play failed:', e);
+                });
+                musicIcon.className = 'ri-volume-up-fill text-xl';
+                isPlaying = true;
+            }
+        });
+
+        // Auto-start music (with user interaction)
+        document.addEventListener('click', () => {
+            if (!isPlaying) {
+                music.play().catch(e => {
+                    console.log('Audio play failed:', e);
+                });
+                musicIcon.className = 'ri-volume-up-fill text-xl';
+                isPlaying = true;
+            }
+        }, { once: true });
+
+        // Smooth scroll animations
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.glass-effect');
+            const speed = scrolled * 0.5;
+            parallax.style.transform = `translateY(${speed}px)`;
+        });
+
+        // Add particle effect on hover
+        document.querySelectorAll('.skill-card').forEach(card => {
+            card.addEventListener('mouseenter', (e) => {
+                const rect = e.target.getBoundingClientRect();
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        createSparkle(rect.left + rect.width/2, rect.top + rect.height/2);
+                    }, i * 100);
+                }
+            });
+        });
+
+        function createSparkle(x, y) {
+            const sparkle = document.createElement('div');
+            sparkle.innerHTML = '✨';
+            sparkle.style.position = 'fixed';
+            sparkle.style.left = x + 'px';
+            sparkle.style.top = y + 'px';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.zIndex = '9999';
+            sparkle.style.fontSize = '1rem';
+            sparkle.style.animation = 'sparkleFloat 1s ease-out forwards';
+            
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1000);
+        }
+
+        // Add sparkle animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes sparkleFloat {
+                0% {
+                    transform: translateY(0) scale(0);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-50px) scale(1);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>
