@@ -8,354 +8,428 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Itim:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
-            font-family: "Itim", sans-serif;
-            font-weight: 400;
-            font-style: normal;
+            font-family: "Inter", sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #000000 0%, #111111 50%, #1a1a1a 100%);
+            background: #0a0a0a;
             overflow-x: hidden;
         }
 
-        /* Snow Animation */
-        .snowflake {
-            position: absolute;
-            top: -10px;
-            color: rgba(255, 255, 255, 0.8);
-            user-select: none;
-            pointer-events: none;
-            font-size: 1rem;
-            animation: snowfall linear infinite;
+        /* Rain Effect */
+        .overlay-rain {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><style>.rain{fill:rgba(255,255,255,0.1);animation:rain 1s linear infinite;}.rain:nth-child(2n){animation-delay:0.5s;}</style><animateTransform attributeName="transform" type="translate" values="0,-100;0,100" dur="1s" repeatCount="indefinite"/></defs><line class="rain" x1="10" y1="0" x2="10" y2="20" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><line class="rain" x1="30" y1="0" x2="30" y2="15" stroke="rgba(255,255,255,0.2)" stroke-width="1"/><line class="rain" x1="50" y1="0" x2="50" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><line class="rain" x1="70" y1="0" x2="70" y2="18" stroke="rgba(255,255,255,0.2)" stroke-width="1"/><line class="rain" x1="90" y1="0" x2="90" y2="22" stroke="rgba(255,255,255,0.3)" stroke-width="1"/></svg>') repeat;
+            animation: rainMove 0.5s linear infinite;
         }
 
-        @keyframes snowfall {
+        @keyframes rainMove {
+            0% { background-position: 0 -100px; }
+            100% { background-position: 0 0; }
+        }
+
+        /* Falling Stars Cursor Trail */
+        .star {
+            position: absolute;
+            pointer-events: none;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            animation: starFall 2s ease-out forwards;
+            z-index: 9999;
+        }
+
+        @keyframes starFall {
             0% {
-                transform: translateY(-100vh) rotate(0deg);
+                transform: translateY(0) rotate(0deg);
                 opacity: 1;
             }
             100% {
-                transform: translateY(100vh) rotate(360deg);
+                transform: translateY(100px) rotate(360deg);
                 opacity: 0;
             }
         }
 
-        @keyframes slideIn {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        /* Typewriter Effect */
+        .typewriter {
+            border-right: 2px solid #ffffff;
+            animation: blink 1s infinite;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        @keyframes blink {
+            0%, 50% { border-color: transparent; }
+            51%, 100% { border-color: #ffffff; }
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+        /* Glitch Effect for Bio */
+        .glitch-effect {
+            position: relative;
+            animation: glitch 3s infinite;
         }
 
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
-            50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.8); }
+        @keyframes glitch {
+            0%, 90%, 100% {
+                transform: translateX(0);
+            }
+            10% {
+                transform: translateX(-2px);
+            }
+            20% {
+                transform: translateX(2px);
+            }
+            30% {
+                transform: translateX(-1px);
+            }
         }
 
-        .animate-slideIn {
-            animation: slideIn 0.6s ease forwards;
+        /* Glass morphism */
+        .glass {
+            background: rgba(23, 23, 23, 0.5);
+            backdrop-filter: blur(50px);
+            -webkit-backdrop-filter: blur(50px);
+            border: 1.5px solid rgba(248, 247, 247, 0.42);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.81);
         }
 
-        .animate-float {
-            animation: float 3s ease-in-out infinite;
+        .glass-container {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid rgba(255, 255, 255, 0.05);
         }
 
-        .animate-pulse-custom {
-            animation: pulse 2s ease-in-out infinite;
+        /* Glow effects */
+        .glow {
+            filter: drop-shadow(0 0 3.5px #ffffff);
         }
 
-        .animate-glow {
-            animation: glow 2s ease-in-out infinite;
+        .profile-glow {
+            filter: drop-shadow(0 0 0.5rem #ffffff);
         }
 
-        .profile-img {
+        /* Hover animations */
+        .hover-scale {
             transition: all 0.3s ease;
         }
 
-        .profile-img:hover {
-            transform: scale(1.05);
-            filter: brightness(1.1);
+        .hover-scale:hover {
+            transform: scale(1.1);
         }
 
-        .music-controls {
-            backdrop-filter: blur(10px);
-            background: rgba(0, 0, 0, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        /* Music player styling */
+        .music-bg {
+            background: #171717;
         }
 
-        .skill-card {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+        /* Progress bar animation */
+        .progress-bar {
+            transition: width 0.3s ease;
         }
 
-        .skill-card:hover {
-            background: rgba(30, 41, 59, 0.9);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        /* Page transition */
+        .page-content {
+            opacity: 0;
+            transform: translateY(-100px);
+            animation: slideDown 1s ease forwards;
         }
 
-        .social-icon {
-            transition: all 0.3s ease;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        @keyframes slideDown {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .social-icon:hover {
-            transform: translateY(-3px) scale(1.1);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        /* Audio visualizer bars */
+        .visualizer-bar {
+            width: 3px;
+            background: rgba(255, 255, 255, 0.6);
+            margin: 0 1px;
+            border-radius: 2px;
+            animation: visualize 1.5s ease-in-out infinite alternate;
         }
 
-        .glass-effect {
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .visualizer-bar:nth-child(1) { animation-delay: 0.1s; height: 15px; }
+        .visualizer-bar:nth-child(2) { animation-delay: 0.2s; height: 25px; }
+        .visualizer-bar:nth-child(3) { animation-delay: 0.3s; height: 20px; }
+        .visualizer-bar:nth-child(4) { animation-delay: 0.4s; height: 30px; }
+        .visualizer-bar:nth-child(5) { animation-delay: 0.5s; height: 18px; }
+
+        @keyframes visualize {
+            from { height: 5px; }
+            to { height: 35px; }
         }
     </style>
 </head>
-<body class="text-gray-100 min-h-screen">
-    <!-- Snow Container -->
-    <div id="snowContainer" class="fixed inset-0 pointer-events-none z-0"></div>
+<body class="bg-neutral-950 text-gray-300 min-h-screen">
+    <!-- Rain Overlay -->
+    <div class="overlay-rain fixed inset-0 h-full w-full pointer-events-none z-20"></div>
 
     <!-- Audio Element -->
-    <audio id="backgroundMusic" loop>
-        <source src="https://www.soundjay.com/misc/sounds-712.mp3" type="audio/mpeg">
-        <source src="https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-one/zapsplat_multimedia_game_sound_bright_warm_positive_001_53866.mp3" type="audio/mpeg">
+    <audio id="backgroundMusic" loop preload="auto">
+        <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/WFMU/Broke_For_Free/Directionless_EP/Broke_For_Free_-_01_-_Night_Owl.mp3" type="audio/mpeg">
+        <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Music Controls -->
-    <div class="fixed top-4 right-4 z-50 music-controls rounded-lg p-3">
-        <button id="musicToggle" class="text-white hover:text-blue-400 transition-colors">
-            <i id="musicIcon" class="ri-volume-up-fill text-xl"></i>
-        </button>
-    </div>
+    <!-- Main Container -->
+    <div class="relative flex h-full min-h-screen w-full flex-col items-center justify-center overflow-x-hidden p-3 py-12 md:py-24">
+        <div class="w-full max-w-[605px]">
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Main Card -->
+                <div class="glass rounded-[50px] relative z-50 mt-12 h-fit w-full">
+                    
+                    <!-- Views Counter -->
+                    <div class="absolute top-6 left-6 z-10">
+                        <div class="glass-container rounded-[50px] flex h-[27px] items-center gap-2 px-[10px]">
+                            <i class="ri-eye-line text-[15px] glow"></i>
+                            <div class="text-[13px] font-light">2.5k</div>
+                        </div>
+                    </div>
 
-    <!-- Main Content -->
-    <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
-        <div class="container max-w-4xl mx-auto">
-            <div class="glass-effect rounded-2xl p-6 md:p-10 shadow-2xl animate-glow">
-                
-                <!-- Profile Header -->
-                <div class="text-center mb-8">
-                    <div class="w-40 h-40 mx-auto mb-6 overflow-hidden rounded-full border-4 border-blue-400 animate-glow profile-img">
-                        <img src="https://i.ibb.co/0VCc8hyG/Screenshot-2568-06-19-at-23-28-12.png" alt="Profile Picture" class="w-full h-full object-cover">
-                    </div>
-                    <h1 class="text-5xl md:text-6xl font-bold text-white mb-3 animate-slideIn">DOG</h1>
-                    <p class="text-xl text-blue-400 mb-4 animate-slideIn">Web Developer</p>
-                    <div class="text-gray-300 space-y-1">
-                        <p><i class="ri-map-pin-line mr-2 text-blue-400"></i>ประเทศไทย</p>
-                        <p><i class="ri-building-line mr-2 text-blue-400"></i>Thailand Co.</p>
-                        <p><i class="ri-book-line mr-2 text-blue-400"></i>คอมพิวเตอร์</p>
-                    </div>
-                </div>
+                    <!-- Profile Content -->
+                    <div class="relative w-full flex-col items-center justify-center p-6 pt-[52px]">
+                        <!-- Profile Image -->
+                        <div class="flex size-[105px] items-center justify-center absolute -top-[60px] left-1/2 -translate-x-1/2">
+                            <img src="https://i.ibb.co/0VCc8hyG/Screenshot-2568-06-19-at-23-28-12.png" 
+                                 alt="Profile" 
+                                 class="absolute inset-0 z-0 h-full w-full rounded-[50px] object-cover shadow-md profile-glow">
+                        </div>
 
-                <!-- Code Animation -->
-                <div class="text-center mb-10 animate-float">
-                    <div class="text-6xl font-mono mb-4 text-blue-400 animate-pulse-custom">&gt;&gt;&gt;</div>
-                    <h2 class="text-3xl font-mono">
-                        <span class="text-yellow-400">def</span> 
-                        <span class="text-blue-400">developer</span>
-                        <span class="text-white">()</span>
-                    </h2>
-                </div>
+                        <!-- Name with Typewriter Effect -->
+                        <div class="relative mx-auto flex w-fit flex-col items-center gap-1">
+                            <h2 class="text-[28px] font-medium tracking-wider text-white profile-glow typewriter" id="typewriter">DOG</h2>
+                        </div>
 
-                <!-- Skills Grid -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-                    <div class="skill-card p-6 rounded-xl text-center animate-slideIn" style="animation-delay: 0.1s">
-                        <i class="ri-html5-fill text-5xl text-orange-400 animate-float mb-3"></i>
-                        <p class="text-sm font-medium">HTML5</p>
-                    </div>
-                    <div class="skill-card p-6 rounded-xl text-center animate-slideIn" style="animation-delay: 0.2s">
-                        <i class="ri-css3-fill text-5xl text-blue-400 animate-float mb-3"></i>
-                        <p class="text-sm font-medium">CSS3</p>
-                    </div>
-                    <div class="skill-card p-6 rounded-xl text-center animate-slideIn" style="animation-delay: 0.3s">
-                        <i class="ri-javascript-fill text-5xl text-yellow-400 animate-float mb-3"></i>
-                        <p class="text-sm font-medium">JavaScript</p>
-                    </div>
-                    <div class="skill-card p-6 rounded-xl text-center animate-slideIn" style="animation-delay: 0.4s">
-                        <i class="ri-database-2-fill text-5xl text-green-400 animate-float mb-3"></i>
-                        <p class="text-sm font-medium">Database</p>
-                    </div>
-                </div>
+                        <!-- Bio with Glitch Effect -->
+                        <section class="mt-2 flex h-fit w-full flex-col items-center justify-center text-[17.5px] tracking-[0.75px]">
+                            <div class="w-fit break-words text-center glitch-effect">
+                                <h3>Language: NextJs, Go, Rust, Lua<br><br>
+                                For work (<a href="https://discord.gg/yTeu5V7sNJ" class="underline text-blue-500" target="_blank">Discord</a>)<br><br></h3>
+                            </div>
+                        </section>
 
-                <!-- Tools Section -->
-                <div class="glass-effect p-6 rounded-xl mb-8">
-                    <h3 class="text-2xl font-mono text-blue-400 mb-6 text-center"># Tools & Technologies</h3>
-                    <div class="grid grid-cols-3 md:grid-cols-6 gap-4">
-                        <div class="skill-card p-4 rounded-lg text-center">
-                            <i class="ri-reactjs-line text-2xl text-blue-400 mb-2"></i>
-                            <p class="text-xs">React</p>
+                        <!-- Location -->
+                        <div class="mt-2 flex items-center justify-center gap-2 text-[15px]">
+                            <i class="ri-map-pin-line text-white glow"></i>
+                            <div>BKK</div>
                         </div>
-                        <div class="skill-card p-4 rounded-lg text-center">
-                            <i class="ri-nodejs-fill text-2xl text-green-400 mb-2"></i>
-                            <p class="text-xs">Node.js</p>
-                        </div>
-                        <div class="skill-card p-4 rounded-lg text-center">
-                            <i class="ri-github-fill text-2xl text-purple-400 mb-2"></i>
-                            <p class="text-xs">GitHub</p>
-                        </div>
-                        <div class="skill-card p-4 rounded-lg text-center">
-                            <i class="ri-terminal-box-fill text-2xl text-yellow-400 mb-2"></i>
-                            <p class="text-xs">Terminal</p>
-                        </div>
-                        <div class="skill-card p-4 rounded-lg text-center">
-                            <i class="ri-code-s-slash-fill text-2xl text-orange-400 mb-2"></i>
-                            <p class="text-xs">VS Code</p>
-                        </div>
-                        <div class="skill-card p-4 rounded-lg text-center">
-                            <i class="ri-cloud-fill text-2xl text-blue-400 mb-2"></i>
-                            <p class="text-xs">Cloud</p>
+
+                        <!-- Social Icons -->
+                        <div class="glass-container mt-[15px] w-full p-4 rounded-[50px]">
+                            <div class="mx-auto flex w-full flex-wrap items-center justify-center gap-4">
+                                <!-- GitHub -->
+                                <div class="hover-scale group cursor-pointer">
+                                    <i class="ri-github-fill text-[40px] text-white glow"></i>
+                                </div>
+                                <!-- Discord -->
+                                <div class="hover-scale group cursor-pointer" onclick="window.open('https://discord.gg/yTeu5V7sNJ', '_blank')">
+                                    <i class="ri-discord-fill text-[40px] text-white glow"></i>
+                                </div>
+                                <!-- Roblox -->
+                                <div class="hover-scale group cursor-pointer" onclick="window.open('https://www.roblox.com/th/users/2991335272/profile?friendshipSourceType=PlayerSearch', '_blank')">
+                                    <i class="ri-gamepad-fill text-[40px] text-white glow"></i>
+                                </div>
+                                <!-- YouTube -->
+                                <div class="hover-scale group cursor-pointer">
+                                    <i class="ri-youtube-fill text-[40px] text-white glow"></i>
+                                </div>
+                                <!-- Spotify -->
+                                <div class="hover-scale group cursor-pointer">
+                                    <i class="ri-spotify-fill text-[40px] text-white glow"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Social Links -->
-                <div class="flex justify-center space-x-6">
-                    <a href="#" class="social-icon p-4 rounded-full hover:text-blue-400">
-                        <i class="ri-github-fill text-2xl"></i>
-                    </a>
-                    <a href="#" class="social-icon p-4 rounded-full hover:text-green-400">
-                        <i class="ri-facebook-fill text-2xl"></i>
-                    </a>
-                    <a href="#" class="social-icon p-4 rounded-full hover:text-red-400">
-                        <i class="ri-youtube-fill text-2xl"></i>
-                    </a>
-                    <a href="#" class="social-icon p-4 rounded-full hover:text-pink-400">
-                        <i class="ri-instagram-fill text-2xl"></i>
-                    </a>
-                    <a href="#" class="social-icon p-4 rounded-full hover:text-green-500">
-                        <i class="ri-spotify-fill text-2xl"></i>
-                    </a>
+                <!-- Music Player Card -->
+                <div class="glass rounded-[10px] mt-6 overflow-hidden">
+                    <div class="music-bg relative flex items-center gap-4 p-4">
+                        <!-- Album Cover -->
+                        <div class="w-20 h-20 rounded-md bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-bold text-xl">
+                            🎵
+                        </div>
+                        
+                        <!-- Track Info -->
+                        <div class="flex-1">
+                            <h5 class="text-base font-semibold text-white">Chill Beats</h5>
+                            <p class="text-sm text-gray-400">Lo-Fi Hip Hop</p>
+                            
+                            <!-- Audio Visualizer -->
+                            <div class="flex items-end gap-1 mt-2" id="visualizer">
+                                <div class="visualizer-bar"></div>
+                                <div class="visualizer-bar"></div>
+                                <div class="visualizer-bar"></div>
+                                <div class="visualizer-bar"></div>
+                                <div class="visualizer-bar"></div>
+                                <div class="visualizer-bar"></div>
+                                <div class="visualizer-bar"></div>
+                                <div class="visualizer-bar"></div>
+                            </div>
+                        </div>
+
+                        <!-- Play Button -->
+                        <button id="playButton" class="glass-container rounded-full p-3 hover-scale" onclick="toggleMusic()">
+                            <i id="playIcon" class="ri-play-fill text-white text-xl"></i>
+                        </button>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="p-4">
+                        <div class="relative h-[4px] w-full overflow-hidden rounded-lg bg-neutral-500/20">
+                            <div id="progressBar" class="absolute left-0 top-0 h-full rounded-lg progress-bar bg-white" style="width: 0%"></div>
+                        </div>
+                        <div class="mt-2 flex justify-between text-[12px] text-white">
+                            <span id="currentTime">0:00</span>
+                            <span id="duration">3:24</span>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Footer -->
-                <div class="text-center mt-8 text-gray-400">
-                    <p class="text-sm">© 2025 DOG Developer. Made with ❤️</p>
+                <!-- Links Cards -->
+                <div class="mt-6 space-y-4">
+                    <!-- Discord Link -->
+                    <div class="glass rounded-[10px] p-3 hover-scale cursor-pointer group" onclick="window.open('https://discord.gg/yTeu5V7sNJ', '_blank')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="glass-container p-3 rounded-[10px]">
+                                    <i class="ri-discord-fill text-[25px] text-white glow"></i>
+                                </div>
+                                <div class="text-sm font-semibold text-white">Discord Server</div>
+                            </div>
+                            <i class="ri-arrow-right-line text-white glow group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+
+                    <!-- Roblox Profile -->
+                    <div class="glass rounded-[10px] p-3 hover-scale cursor-pointer group" onclick="window.open('https://www.roblox.com/th/users/2991335272/profile?friendshipSourceType=PlayerSearch', '_blank')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="glass-container p-3 rounded-[10px]">
+                                    <i class="ri-gamepad-fill text-[25px] text-white glow"></i>
+                                </div>
+                                <div class="text-sm font-semibold text-white">Roblox Profile</div>
+                            </div>
+                            <i class="ri-arrow-right-line text-white glow group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Snow Animation
-        function createSnowflake() {
-            const snowflake = document.createElement('div');
-            snowflake.className = 'snowflake';
-            snowflake.innerHTML = '❄';
-            snowflake.style.left = Math.random() * 100 + 'vw';
-            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
-            snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
-            snowflake.style.opacity = Math.random();
-            
-            document.getElementById('snowContainer').appendChild(snowflake);
-            
-            setTimeout(() => {
-                snowflake.remove();
-            }, 5000);
-        }
-
-        // Create snowflakes continuously
-        setInterval(createSnowflake, 300);
-
-        // Music Control
+        // Music functionality
         const music = document.getElementById('backgroundMusic');
-        const musicToggle = document.getElementById('musicToggle');
-        const musicIcon = document.getElementById('musicIcon');
+        const playButton = document.getElementById('playButton');
+        const playIcon = document.getElementById('playIcon');
+        const progressBar = document.getElementById('progressBar');
+        const currentTimeSpan = document.getElementById('currentTime');
+        const visualizer = document.getElementById('visualizer');
         let isPlaying = false;
 
-        musicToggle.addEventListener('click', () => {
+        // Set volume
+        music.volume = 0.3;
+
+        function toggleMusic() {
             if (isPlaying) {
                 music.pause();
-                musicIcon.className = 'ri-volume-mute-fill text-xl';
+                playIcon.className = 'ri-play-fill text-white text-xl';
+                visualizer.style.display = 'none';
                 isPlaying = false;
             } else {
-                music.play().catch(e => {
+                music.play().then(() => {
+                    playIcon.className = 'ri-pause-fill text-white text-xl';
+                    visualizer.style.display = 'flex';
+                    isPlaying = true;
+                }).catch(e => {
                     console.log('Audio play failed:', e);
                 });
-                musicIcon.className = 'ri-volume-up-fill text-xl';
-                isPlaying = true;
+            }
+        }
+
+        // Update progress bar
+        music.addEventListener('timeupdate', () => {
+            if (music.duration) {
+                const progress = (music.currentTime / music.duration) * 100;
+                progressBar.style.width = progress + '%';
+                
+                // Update current time
+                const minutes = Math.floor(music.currentTime / 60);
+                const seconds = Math.floor(music.currentTime % 60);
+                currentTimeSpan.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
             }
         });
 
-        // Auto-start music (with user interaction)
+        // Auto-start music on first user interaction
         document.addEventListener('click', () => {
             if (!isPlaying) {
-                music.play().catch(e => {
-                    console.log('Audio play failed:', e);
-                });
-                musicIcon.className = 'ri-volume-up-fill text-xl';
-                isPlaying = true;
+                toggleMusic();
             }
         }, { once: true });
 
-        // Smooth scroll animations
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallax = document.querySelector('.glass-effect');
-            const speed = scrolled * 0.5;
-            parallax.style.transform = `translateY(${speed}px)`;
-        });
-
-        // Add particle effect on hover
-        document.querySelectorAll('.skill-card').forEach(card => {
-            card.addEventListener('mouseenter', (e) => {
-                const rect = e.target.getBoundingClientRect();
-                for (let i = 0; i < 5; i++) {
-                    setTimeout(() => {
-                        createSparkle(rect.left + rect.width/2, rect.top + rect.height/2);
-                    }, i * 100);
-                }
-            });
-        });
-
-        function createSparkle(x, y) {
-            const sparkle = document.createElement('div');
-            sparkle.innerHTML = '✨';
-            sparkle.style.position = 'fixed';
-            sparkle.style.left = x + 'px';
-            sparkle.style.top = y + 'px';
-            sparkle.style.pointerEvents = 'none';
-            sparkle.style.zIndex = '9999';
-            sparkle.style.fontSize = '1rem';
-            sparkle.style.animation = 'sparkleFloat 1s ease-out forwards';
+        // Typewriter effect
+        function typeWriter(text, element, speed = 100) {
+            let i = 0;
+            element.textContent = '';
             
-            document.body.appendChild(sparkle);
-            
-            setTimeout(() => {
-                sparkle.remove();
-            }, 1000);
-        }
-
-        // Add sparkle animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes sparkleFloat {
-                0% {
-                    transform: translateY(0) scale(0);
-                    opacity: 1;
-                }
-                100% {
-                    transform: translateY(-50px) scale(1);
-                    opacity: 0;
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    element.classList.add('typewriter');
                 }
             }
-        `;
-        document.head.appendChild(style);
+            type();
+        }
+
+        // Start typewriter effect when page loads
+        window.addEventListener('load', () => {
+            const typewriterElement = document.getElementById('typewriter');
+            setTimeout(() => {
+                typeWriter('DOG', typewriterElement, 150);
+            }, 500);
+        });
+
+        // Cursor trail effect
+        let mouseX = 0;
+        let mouseY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // Create falling star
+            if (Math.random() > 0.7) { // 30% chance
+                createStar(mouseX, mouseY);
+            }
+        });
+
+        function createStar(x, y) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.innerHTML = '✨';
+            star.style.left = x + 'px';
+            star.style.top = y + 'px';
+            
+            document.body.appendChild(star);
+            
+            setTimeout(() => {
+                star.remove();
+            }, 2000);
+        }
+
+        // Add some random falling stars
+        setInterval(() => {
+            if (Math.random() > 0.8) {
+                createStar(
+                    Math.random() * window.innerWidth,
+                    Math.random() * 100
+                );
+            }
+        }, 1000);
     </script>
 </body>
 </html>
